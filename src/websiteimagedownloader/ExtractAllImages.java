@@ -29,11 +29,13 @@ public class ExtractAllImages {
     public static String imageHeight = "370";
     
     public static void extractAll() throws Exception {
-        String webUrl = "http://magic.wizards.com/en/articles/archive/ktk-cig-en";
-//        String webUrl = "http://magic.wizards.com/en/content/magic-2015-core-set-card-set-archive-products-game-info";
+        String webUrl = "http://magic.wizards.com/en/articles/archive/card-image-gallery/magicorigins";
+        //String webUrl = "http://magic.wizards.com/en/articles/archive/card-image-gallery/dragonsoftarkir";
         Document doc = Jsoup.connect(webUrl).get();
+        System.out.println(doc.toString());
        // System.out.println(doc.html());
-        Elements elements = doc.getElementsByClass("noborder");
+        Elements elements = doc.getElementsByAttributeValue("w", "265");
+//        Elements elements = doc.getElementsByClass("full-page");
         
         for (Element e : elements) {
             Element imgElement = e;//.child(0);
@@ -54,7 +56,7 @@ public class ExtractAllImages {
     }
     
     public static void magicSpoilerExtractor() throws Exception {
-        String originalWebUrl =  "http://www.magicspoiler.com/khans-tarkir/";
+        String originalWebUrl =  "http://www.magicspoiler.com/dragons-tarkir-spoiler/";
         boolean failed = false;
         int pageNumber = 1;
         while (!failed) {
